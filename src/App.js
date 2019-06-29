@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {connect} from './react-redux'
 
-function App() {
+let actions = {
+  increment(){
+    return {type:'increment',data:99}
+  },
+  decrement(){
+    return {type:'decrement',data:99}
+  }
+}
+function App(props) {
+  console.log('111',props)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div>{props.number}</div>
+        <button onClick={props.decrement}>-</button>
+        <button onClick={props.increment}>+</button>
     </div>
   );
 }
 
-export default App;
+let mapStateToProps = state=>{
+  return state
+}
+export default connect(
+  mapStateToProps,
+  actions
+)(App);
